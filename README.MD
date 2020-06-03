@@ -50,11 +50,11 @@ import (
 
 func main() {
 	log := logrus.New()
-	client, err := elastic.NewClient(elastic.SetURL("http://localhost:9200"))
+	client, err := elastic.NewClient(elastic.SetSniff(false), elastic.SetURL("http://localhost:9200"))
 	if err != nil {
 		log.Panic(err)
 	}
-	hook, err := elogrus.NewAsyncElasticHook(client, "localhost", logrus.DebugLevel, "mylog")
+	hook, err := elogrus.NewElasticHook(client, "localhost", logrus.DebugLevel, "mylog")
 	if err != nil {
 		log.Panic(err)
 	}
